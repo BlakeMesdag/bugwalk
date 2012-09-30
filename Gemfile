@@ -6,7 +6,6 @@ gem 'thin'
 
 gem 'sqlite3'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -33,3 +32,6 @@ end
 group :test do
   gem 'mocha'
 end
+
+gem 'omniauth', '1.1.1'
+gem 'omniauth-google-apps'
