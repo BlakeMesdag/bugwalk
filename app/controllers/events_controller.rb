@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
-  before_filter :load_event, :except => [:index, :create]
+  before_filter :load_event, :except => [:index, :create, :new]
 
   respond_to :html, :json
 
   def index
-    @events = Event.all
+    @events = Event.order("starts_at DESC").all
   end
 
   def show

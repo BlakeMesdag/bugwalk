@@ -1,23 +1,7 @@
-Bugmap::Application.routes.draw do
-  get "bugs/index"
+Bugwalk::Application.routes.draw do
+  resources :events
 
-  get "bugs/show"
-
-  get "bugs/edit"
-
-  get "bugs/update"
-
-  get "bugs/destroy"
-
-  get "events/index"
-
-  get "events/show"
-
-  get "events/edit"
-
-  get "events/update"
-
-  get "events/destroy"
+  root :to => 'events#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

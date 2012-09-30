@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Bugmap::Application.load_tasks
+Bugwalk::Application.load_tasks

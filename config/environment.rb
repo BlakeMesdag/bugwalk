@@ -2,4 +2,4 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-Bugmap::Application.initialize!
+Bugwalk::Application.initialize!

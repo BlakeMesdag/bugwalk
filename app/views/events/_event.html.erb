@@ -1,0 +1,8 @@
+<div class="well well-small">
+<div class="page-header">
+  <h3><%= event.title %></h3>
+  <p>Event starts <%= event.starts_at.strftime("%A %b %e %l:%M%p") %> and goes until <%= event.ends_at.strftime("%A %b %e %l:%M%p") %></p>
+</div>
+
+  <p><%= event.description.html_safe %></p>
+</div>

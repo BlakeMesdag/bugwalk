@@ -37,12 +37,16 @@ class Event < ActiveRecord::Base
 
     hashtags.each do |tag|
       parts = tag.split("#")
-      issues[parts[0]] = parts[1]
+      issues[parts[0]] = [parts[1], tag]
     end
 
-    issues.each do |repo, number|
-      bugs.create(owner: "Shopify", repo: repo, number: number)
+    issues.each do |repo, info|
+      bug = bugs.create(owner: "Shopify", repo: repo, number: info[0])
+
+      self.description = description.sub(info[1], "<a href=\"#{bug.github_link}\">#{bug.github_title}</a>")
     end
+
+    save
   end
 
   after_create :create_bugs_from_hashtags
