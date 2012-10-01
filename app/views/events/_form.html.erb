@@ -18,7 +18,7 @@
       <div class="control-group">
         <%= label_tag :starts_at, "Event Time", :class => 'control-label' %>
         <div class="controls">
-          <%= f.time_select :starts_at, { :ignore_date => true, :minute_step => 15 }, :class => "input-small" %>
+          <%= f.time_select :starts_at, { :ignore_date => true, :minute_step => 15 }, :class => "input-mini" %>
         </div>
       </div>
 
@@ -33,9 +33,7 @@
         <div class="controls">
           <%= link_to raw('<b class="icon-ok icon-white"></b> Save Event'), "#", :class => "submit btn btn-primary" %>
           <% unless event.new_record? %>
-            <%= form_for(event, :method => "delete") do %>
-              <%= link_to raw('<b class="icon-trash icon-white"></b> Destroy Event'), "#", :class => "submit btn btn-danger" %>
-            <% end %>
+            <%= link_to raw('<b class="icon-trash icon-white"></b> Destroy Event'), "#", :class => "destroy btn btn-danger" %>
           <% end %>
         </div>
       </div>
@@ -48,6 +46,13 @@
 
   $(".submit").click(function() { 
     $(this).parents("form:first").submit(); 
+    return false; 
+  });
+
+  $(".destroy").click(function() { 
+    var form = $(this).parents("form:first");
+    $(form).find("[name=\"_method\"]").val("delete");
+    form.submit();
     return false; 
   });
 <% end %>
