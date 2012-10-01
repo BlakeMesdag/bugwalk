@@ -1,8 +1,12 @@
 <div class="well well-small">
 <div class="page-header">
-  <h3><%= event.title %></h3>
+  <h3><%= params[:action] == 'show' ? event.title : link_to(event.title, event) %></h3>
   <p>Event starts <%= event.starts_at.strftime("%A %b %e %l:%M%p") %> and goes until <%= event.ends_at.strftime("%A %b %e %l:%M%p") %></p>
 </div>
 
-  <p><%= event.description.html_safe %></p>
+  <% if params[:action] == 'index' %>
+  <p><%= event.rendered_description.slice(0, 200).html_safe %></p>
+  <% else %>
+  <p><%= event.rendered_description.html_safe %></p>
+  <% end %>
 </div>

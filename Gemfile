@@ -22,7 +22,8 @@ gem 'jquery-rails'
 
 gem 'less-rails-bootstrap'
 gem 'twitter-bootswatch-rails'
-gem 'bootstrap-datepicker-rails'
+gem 'redcarpet'
+gem 'github-markup'
 
 gem 'github_api'
 

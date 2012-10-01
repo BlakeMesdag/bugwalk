@@ -10,6 +10,12 @@ class Event < ActiveRecord::Base
 
   has_many :bugs
 
+  def rendered_description
+    Rails.cache.fetch("description:#{id}#{updated_at}") do
+      @rendered_description ||= Github::Markdown.new.render(:text => description, :mode => :gfm)
+    end
+  end
+
   private
   def event_date_passed?
     return false if starts_at.blank? || ends_at.blank?
@@ -31,25 +37,10 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def create_bugs_from_hashtags
-    hashtags = description.scan(/[a-z]+#[0-9]+/)
-    issues = {}
-
-    hashtags.each do |tag|
-      parts = tag.split("#")
-      issues[parts[0]] = [parts[1], tag]
-    end
-
-    issues.each do |repo, info|
-      bug = bugs.create(owner: "Shopify", repo: repo, number: info[0])
-
-      self.description = description.sub(info[1], "<a href=\"#{bug.github_link}\">#{bug.github_title}</a>")
-    end
-
-    save
+  def set_ends_at
+    return unless ends_at.nil?
+    self.ends_at = starts_at + 1.hour
   end
-
-  after_create :create_bugs_from_hashtags
 
   validates :title, :presence => true
   validates :starts_at, :presence => true
@@ -57,4 +48,6 @@ class Event < ActiveRecord::Base
   validates :description, :presence => true
 
   validate :event_date_passed?, :ends_after_event_starts
+
+  before_save :set_ends_at
 end

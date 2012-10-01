@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="span12">
+    <%= form_for(event, :html => { :class => "form-horizontal"}) do |f| %>
+      <div class="control-group">
+        <%= f.label :title, "Event Title", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :title, :class => "input-xlarge" %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :starts_at, "Event Date", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.date_select :starts_at, {}, :class => 'datepicker input-small', :placeholder => '10/01/2012' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= label_tag :starts_at, "Event Time", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.time_select :starts_at, { :ignore_date => true, :minute_step => 15 }, :class => "input-small" %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :description, "Event Description", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :description, :class => "input-xxlarge" %>
+          </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= link_to raw('<b class="icon-ok icon-white"></b> Save Event'), "#", :class => "submit btn btn-primary" %>
+          <% unless event.new_record? %>
+            <%= form_for(event, :method => "delete") do %>
+              <%= link_to raw('<b class="icon-trash icon-white"></b> Destroy Event'), "#", :class => "submit btn btn-danger" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  $(".datepicker").datepicker();
+
+  $(".submit").click(function() { 
+    $(this).parents("form:first").submit(); 
+    return false; 
+  });
+<% end %>

@@ -1,2 +1,8 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<div class="row">
+  <div class="span12">
+    <%= render @event %>
+    <% if params[:action] == 'show' %>
+      <%= link_to("back to events", "/") %>
+    <% end %>
+  </div>
+</div>

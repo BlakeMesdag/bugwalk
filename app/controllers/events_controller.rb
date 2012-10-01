@@ -7,10 +7,10 @@ class EventsController < ApplicationController
     d = Date.today
     start_date = d.at_beginning_of_week(:sunday).strftime
     end_date = d.at_end_of_week(:sunday).strftime
-    @this_weeks_events = Event.where("starts_at > ? AND starts_at < ?", start_date, end_date)
+    @this_weeks_events = Event.where("starts_at > ? AND starts_at < ?", start_date, end_date).limit(1)
 
-    relation = Event.order("starts_at DESC").limit(10)
-    relation = relation.offset(10 * (params[:page].to_i - 1)) if params[:page] && params[:page].to_i > 0
+    relation = Event.order("starts_at DESC").where("starts_at > ?", Time.now.utc)
+    relation = relation.limit(10).offset(10 * (params[:page].to_i - 1)) if params[:page] && params[:page].to_i > 0
     @events = relation.all - @this_weeks_events
 
     @event_count = Event.count
@@ -27,9 +27,11 @@ class EventsController < ApplicationController
   end
 
   def create
-    @bug = Bug.create(params[:bug])
+    @event = Event.new(params[:event])
+    @event.ends_at = @event.starts_at + 1.hour
+    @event.save
 
-    respond_with @bug
+    respond_with @event
   end
 
   def edit
@@ -39,13 +41,13 @@ class EventsController < ApplicationController
   def update
     @event.update_attributes(params[:event])
     
-    respond_with @event
+    redirect_to :action => 'show'
   end
 
   def destroy
     @event.destroy
     
-    respond_with @event
+    redirect_to :action => 'index'
   end
 
   private

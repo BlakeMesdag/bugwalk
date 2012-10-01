@@ -5,8 +5,10 @@
       <%= render @this_weeks_events %>
     <% end %>
     
-    <h2>Upcoming Events</h2>
-    <%= render @events %>
+    <% if @events.any? %>
+      <h2>Upcoming Events</h2>
+      <%= render @events %>
+    <% end %>
   </div>
 
   <div class="span3">
