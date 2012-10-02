@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def rendered_bio
+    return '<span class="muted">Click edit to fill in a profile on the left</span>' if bio.nil?
     Rails.cache.fetch("bio:#{updated_at}:#{email}") do
       Github::Markdown.new.render(:text => bio, :mode => :gfm).html_safe
     end
