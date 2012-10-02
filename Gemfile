@@ -4,8 +4,6 @@ gem 'rails', '3.2.8'
 
 gem 'thin'
 
-gem 'sqlite3'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -29,10 +27,15 @@ gem 'github_api'
 
 group :development do
   gem 'debugger'
+  gem 'sqlite3'
 end
 
 group :test do
   gem 'mocha'
+end
+
+group :production do
+  gem 'pg'
 end
 
 gem 'omniauth', '1.1.1'
