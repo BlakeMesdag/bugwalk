@@ -7,6 +7,6 @@
   <% if params[:action] == 'index' %>
   <p><%= event.rendered_description.slice(0, 200).html_safe %></p>
   <% else %>
-  <p><%= event.rendered_description.html_safe %></p>
+  <p><%= event.rendered_description %></p>
   <% end %>
 </div>
