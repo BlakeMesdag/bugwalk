@@ -40,19 +40,3 @@
     <% end %>
   </div>
 </div>
-
-<%= javascript_tag do %>
-  $(".datepicker").datepicker();
-
-  $(".submit").click(function() { 
-    $(this).parents("form:first").submit(); 
-    return false; 
-  });
-
-  $(".destroy").click(function() { 
-    var form = $(this).parents("form:first");
-    $(form).find("[name=\"_method\"]").val("delete");
-    form.submit();
-    return false; 
-  });
-<% end %>

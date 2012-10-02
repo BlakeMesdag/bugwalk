@@ -42,8 +42,9 @@ ActiveRecord::Schema.define(:version => 20121001222323) do
     t.string   "name"
     t.string   "email"
     t.text     "bio"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "is_mentor",  :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
 end

@@ -1,0 +1,42 @@
+<div class="mentor">
+  <div class="row">
+    <div class="span2">
+      <%= image_tag mentor.gravatar_url, :class => "img-rounded" %>
+
+      <div style="margin-top: 10px">
+        <% if session[:user_id] == mentor.id %>
+          <%= form_for(mentor, :url => "/mentors/#{mentor.id}", :html => { :class => "form form-inline" }) do |f| %>
+            <%= f.hidden_field :is_mentor, :value => !mentor.is_mentor %>
+            <%= link_to raw('<b class="icon-pencil icon-white"></b>'), "/mentors/#{mentor.id}/edit", :class => 'btn btn-primary btn-small' %>
+
+            <% if mentor.is_mentor %>
+              <%= link_to raw('<b class="icon-arrow-down icon-white"></b> Unpublish'), "/mentors/#{mentor.id}", :class => 'submit btn btn-danger btn-small' %>
+            <% else %>
+              <%= link_to raw('<b class="icon-arrow-up icon-white"></b> Publish'), "/mentors/#{mentor.id}", :class => 'submit btn btn-danger btn-small' %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% if !mentor.mentees.include?(@user) %>
+            <%= link_to raw('<b class="icon-plus icon-white"></b> Become a Protege'), "/mentees/create?mentor_id=#{mentor.id}", :class => "btn btn-success btn-small" %>
+          <% else %>
+            <%= link_to raw('<b class="icon-minus icon-white"></b> Finish Mentorship'), "/mentees/destroy?mentor_id=#{mentor.id}", :class => "btn btn-success btn-small" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="bio span4">
+      <h4><%= mentor.name %><%= mentor.name.end_with?("s") ? "" : "s" %> Bio</h4>
+      <%= mentor.rendered_bio %>
+    </div>
+
+    <% if mentor.mentees.any? %>
+      <div class="proteges span6">
+        <h4><%= mentor.name %><%= mentor.name.end_with?("s") ? "" : "s" %> Proteges</h4>
+        <% mentor.mentees.each do |mentee| %>
+          <%= image_tag mentee.gravatar_url(48), :class => "img-rounded", :alt => mentee.name, :title => mentee.name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

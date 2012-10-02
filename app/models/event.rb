@@ -12,10 +12,8 @@ class Event < ActiveRecord::Base
 
   def rendered_description
     Rails.cache.fetch("description:#{id}#{updated_at}") do
-      @rendered_description ||= Github::Markdown.new.render(:text => description, :mode => :gfm)
+      Github::Markdown.new.render(:text => description, :mode => :gfm).html_safe
     end
-
-    @rendered_description.html_safe
   end
 
   private

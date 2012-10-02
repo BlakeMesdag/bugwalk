@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.text :bio
+      t.boolean :is_mentor, :default => false
 
       t.timestamps
     end
