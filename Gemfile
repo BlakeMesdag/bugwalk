@@ -40,3 +40,5 @@ end
 
 gem 'omniauth', '1.1.1'
 gem 'omniauth-google-apps'
+
+gem 'newrelic_rpm'
