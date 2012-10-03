@@ -1,13 +1,18 @@
 <div class="row">
   <div class="span9">
-    <% if @this_weeks_events.any? %>
+
       <h2>This Weeks Event</h2>
-      <%= render @this_weeks_events %>
+    <% if @this_weeks_events.any? %>
+      <h4><%= link_to @this_weeks_event.title, event_path(@this_weeks_event) %> on <%= @this_weeks_event.starts_at.strftime("%A") %> @ <%= @this_weeks_event.starts_at.strftime("%l:%M%p") %></h4>
+    <% else %>
+      <h5 class="muted">No events scheduled this week</h5>
     <% end %>
     
-    <% if @events.any? %>
       <h2>Upcoming Events</h2>
+    <% if @events.any? %>
       <%= render @events %>
+    <% else %>
+      <h5 class="muted">No upcoming events</h5>
     <% end %>
   </div>
 
@@ -20,5 +25,10 @@
     <h1>=</h1>
     <h4>Bug Walk /bəg wôk/</h4>
     <p>Moving at a regular and fairly slow pace through a computer program or system in order to solve a an error</p>
+
+    <% if @user.admin? %>
+      <br/>
+      <%= link_to raw('<b class="icon-plus icon-white"></b> Add Event'), { :controller => "events", :action => "new" }, :class => "btn btn-primary" %>
+    <% end %>
   </div>
 </div>

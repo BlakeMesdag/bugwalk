@@ -16,6 +16,11 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def starts_at=(value)
+    self.ends_at = value + 1.hour
+    super
+  end
+
   private
   def event_date_passed?
     return false if starts_at.blank? || ends_at.blank?

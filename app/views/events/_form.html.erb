@@ -35,6 +35,7 @@
           <% unless event.new_record? %>
             <%= link_to raw('<b class="icon-trash icon-white"></b> Destroy Event'), "#", :class => "destroy btn btn-danger" %>
           <% end %>
+          <%= link_to raw('<b class="icon-remove icon-white"></b> Cancel'), "/", :class => "btn btn-inverse" %>
         </div>
       </div>
     <% end %>

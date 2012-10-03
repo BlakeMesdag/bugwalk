@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_filter :load_event, :except => [:index, :create, :new]
+  before_filter :load_user
 
   respond_to :html, :json
 
@@ -8,6 +9,7 @@ class EventsController < ApplicationController
     start_date = d.at_beginning_of_week(:sunday).strftime
     end_date = d.at_end_of_week(:sunday).strftime
     @this_weeks_events = Event.where("starts_at > ? AND starts_at < ?", start_date, end_date).limit(1)
+    @this_weeks_event = @this_weeks_events.first
 
     relation = Event.order("starts_at DESC").where("starts_at > ?", Time.now.utc)
     relation = relation.limit(10).offset(10 * (params[:page].to_i - 1)) if params[:page] && params[:page].to_i > 0
@@ -54,5 +56,9 @@ class EventsController < ApplicationController
 
   def load_event
     @event = Event.find(params[:id])
+  end
+
+  def load_user
+    @user = User.find(session[:user_id])
   end
 end

@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   attr_accessible :bio, :email, :name, :is_mentor
 
+  def admin?
+    ENV['ADMINS'].split(",").include?(email)
+  end
+
   def self.all_mentors
     User.where(:is_mentor => true)
   end

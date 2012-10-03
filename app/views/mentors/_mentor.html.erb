@@ -10,33 +10,49 @@
             <%= link_to raw('<b class="icon-pencil icon-white"></b>'), "/mentors/#{mentor.id}/edit", :class => 'btn btn-primary btn-small' %>
 
             <% if mentor.is_mentor %>
-              <%= link_to raw('<b class="icon-arrow-down icon-white"></b> Unpublish'), "/mentors/#{mentor.id}", :class => 'submit btn btn-danger btn-small' %>
+              <%= link_to raw('<b class="icon-arrow-down icon-white"></b> Remove'), "/mentors/#{mentor.id}", :class => 'submit btn btn-danger btn-small' %>
             <% else %>
-              <%= link_to raw('<b class="icon-arrow-up icon-white"></b> Publish'), "/mentors/#{mentor.id}", :class => 'submit btn btn-danger btn-small' %>
+              <%= link_to raw('<b class="icon-arrow-up icon-white"></b> Publish'), "/mentors/#{mentor.id}", :class => 'submit btn btn-primary btn-small' %>
             <% end %>
           <% end %>
         <% else %>
-          <% if !mentor.mentees.include?(@user) %>
+          <% if !mentor.mentees.include?(@user) && @user.mentors.count < 1 %>
             <%= link_to raw('<b class="icon-plus icon-white"></b> Become a Protege'), "/mentees/create?mentor_id=#{mentor.id}", :class => "btn btn-success btn-small" %>
           <% else %>
-            <%= link_to raw('<b class="icon-minus icon-white"></b> Finish Mentorship'), "/mentees/destroy?mentor_id=#{mentor.id}", :class => "btn btn-success btn-small" %>
+            <% if @user.mentors.include?(mentor) %>
+              <%= link_to raw('<b class="icon-minus icon-white"></b> Finish Mentorship'), "/mentees/destroy?mentor_id=#{mentor.id}", :class => "btn btn-success btn-small" %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
     </div>
 
     <div class="bio span4">
-      <h4><%= mentor.name %><%= mentor.name.end_with?("s") ? "" : "s" %> Bio</h4>
+      <h4>
+        <% if session[:user_id] == mentor.id %>
+          Your Bio
+        <% else %>
+          <%= mentor.name %><%= mentor.name.end_with?("s") ? "" : "s" %> Bio
+        <% end %>
+      </h4>
       <%= mentor.rendered_bio %>
     </div>
 
-    <% if mentor.mentees.any? %>
       <div class="proteges span6">
-        <h4><%= mentor.name %><%= mentor.name.end_with?("s") ? "" : "s" %> Proteges</h4>
+        <h4>
+          <% if session[:user_id] == mentor.id %>
+           Your Proteges
+          <% else %>
+            <%= mentor.name %><%= mentor.name.end_with?("s") ? "" : "s" %> Proteges
+          <% end %>
+        </h4>
         <% mentor.mentees.each do |mentee| %>
           <%= image_tag mentee.gravatar_url(48), :class => "img-rounded", :alt => mentee.name, :title => mentee.name %>
         <% end %>
+
+        <% (1..(Mentorship::MAX_PROTEGES - mentor.mentees.count)).each do %>
+          <%= image_tag "open.png", :class => "img-rounded", :alt => "open", :title => "open" %>
+        <% end %>
       </div>
-    <% end %>
   </div>
 </div>

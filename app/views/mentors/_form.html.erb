@@ -1,5 +1,5 @@
 <%= form_for(mentor, :url => "/mentors/#{mentor.id}", :html => { :class => "form" }) do |f| %>
   <%= f.text_area :bio, :class => "span12", :placeholder => "Write a bio here, it will be rendered with Github Flavoured Markdown" %>
-  <%= link_to raw('<b class="icon-ok icon-white"></b> Save'), "#", :class => "btn btn-primary submit" %>
-  <%= link_to raw('<b class="icon-remove icon-white"></b> Cancel'), "/mentors", :class => "btn btn-danger" %>
+  <%= link_to raw('<b class="icon-ok icon-white"></b> Save Bio'), "#", :class => "btn btn-primary submit" %>
+  <%= link_to raw('<b class="icon-remove icon-white"></b> Cancel'), "/mentors", :class => "btn btn-inverse" %>
 <% end %>
