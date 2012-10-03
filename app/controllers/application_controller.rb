@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate
 
   def authenticate
+    session[:redirect_to] = request.path
     redirect_to '/login' unless session[:active]
   end
 end

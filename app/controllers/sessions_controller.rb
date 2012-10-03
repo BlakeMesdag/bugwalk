@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
       session[:user_id] = user.id
 
-      redirect_to '/'
+      redirect_to session[:redirect_to].nil? ? "/" : session[:redirect_to]
     end
   end
 end
