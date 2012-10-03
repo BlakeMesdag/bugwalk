@@ -6,6 +6,9 @@ class SessionsController < ApplicationController
   end
 
   def create
+    redirect_to = session[:redirect_to]
+    reset_session
+
     if auth = request.env['omniauth.auth']
       session[:active] = true
 
@@ -17,7 +20,7 @@ class SessionsController < ApplicationController
 
       session[:user_id] = user.id
 
-      redirect_to session[:redirect_to].nil? ? "/" : session[:redirect_to]
+      redirect_to redirect_to.nil? ? "/" : redirect_to
     end
   end
 end
