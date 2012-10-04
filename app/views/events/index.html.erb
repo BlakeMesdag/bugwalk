@@ -10,7 +10,9 @@
     
       <h2>Upcoming Events</h2>
     <% if @events.any? %>
-      <%= render @events %>
+      <% @events.each do |event| %>
+      <h4><%= link_to event.title, event_path(event) %> on <%= event.starts_at.strftime("%A %b %e") %> @ <%= event.starts_at.strftime("%l:%M%p") %></h4>
+      <% end %>
     <% else %>
       <h5 class="muted">No upcoming events</h5>
     <% end %>
