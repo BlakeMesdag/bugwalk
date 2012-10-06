@@ -8,6 +8,8 @@
 class Event < ActiveRecord::Base
   attr_accessible :description, :ends_at, :starts_at, :title
 
+  has_many :comments
+
   def rendered_description
     Rails.cache.fetch("description:#{id}#{updated_at}") do
       Github::Markdown.new.render(:text => description, :mode => :gfm).html_safe

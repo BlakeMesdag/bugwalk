@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :comments
 
   def admin?
-    ENV['ADMINS'].split(",").include?(email)
+    (ENV['ADMINS'] || "").split(",").include?(email)
   end
 
   def self.all_mentors
