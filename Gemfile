@@ -31,11 +31,14 @@ group :development do
 end
 
 group :test do
+  gem 'test-unit'
   gem 'mocha'
 end
 
 group :production do
   gem 'pg'
+  gem 'memcachier' 
+  gem 'dalli'
 end
 
 gem 'omniauth', '1.1.1'

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :bio, :email, :name, :is_mentor
 
+  has_many :comments
+
   def admin?
     ENV['ADMINS'].split(",").include?(email)
   end
