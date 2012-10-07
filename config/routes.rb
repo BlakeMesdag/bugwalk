@@ -1,14 +1,12 @@
 Bugwalk::Application.routes.draw do
-  match "mentees/create"
-  match "mentees/destroy"
-
   match '/login', :to => 'sessions#new', :as => :login
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
 
   resources :events
-
   resources :mentors
+  resources :mentees, :only => [:create, :destroy]
+  resources :comments, :only => [:create, :update, :destroy]
 
   root :to => 'events#index'
 

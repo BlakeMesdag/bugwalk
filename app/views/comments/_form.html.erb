@@ -1,0 +1,7 @@
+<%= form_for(comment, :html => { :class => "form"}) do |f| %>
+  <%= f.hidden_field :event_id %>
+  <%= f.text_area :body, :class => "input-xxlarge", :rows => "5" %>
+  <div class="control-group">
+    <div class="controls">
+      <%= link_to raw('<b class="icon-comment icon-white"></b> Comment'), comments_path(comment), :class => "submit btn btn-primary" %>
+<% end %>

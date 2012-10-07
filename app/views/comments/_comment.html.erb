@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span12">
     <div class="well well-small">
-      <p><%= comment.body %></p>
+      <p><%= comment.rendered_body %></p>
       <h6>added by <%= comment.user.name %> on <%= comment.created_at.strftime("%b %d") %> @ <%= comment.created_at.strftime("%H:%M") %></h6>
     </div>
   </div>

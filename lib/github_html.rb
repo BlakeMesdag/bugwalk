@@ -49,6 +49,8 @@ class GithubHTML < Redcarpet::Render::HTML
 
     link_usernames(text)
 
+    gfm(text)
+
     text
   end
 

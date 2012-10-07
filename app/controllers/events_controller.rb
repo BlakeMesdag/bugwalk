@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_filter :load_event, :except => [:index, :create, :new]
-  before_filter :load_user
 
   respond_to :html, :json
 
@@ -56,9 +55,5 @@ class EventsController < ApplicationController
 
   def load_event
     @event = Event.find(params[:id])
-  end
-
-  def load_user
-    @user = User.find(session[:user_id])
   end
 end
