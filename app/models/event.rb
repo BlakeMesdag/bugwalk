@@ -13,14 +13,6 @@ class Event < ActiveRecord::Base
 
   renderable :description
 
-  # def rendered_description
-  #   Rails.cache.fetch("description:#{id}#{updated_at}") do
-  #     Bugwalk.markdown.render(description).html_safe
-  #   end
-  # rescue
-  #   description
-  # end
-
   def starts_at=(value)
     self.ends_at = value + 1.hour if value
     super
