@@ -6,17 +6,20 @@
 # t.datetime "updated_at",  :null => false
 
 class Event < ActiveRecord::Base
+  include Renderable
   attr_accessible :description, :ends_at, :starts_at, :title
 
   has_many :comments
 
-  def rendered_description
-    Rails.cache.fetch("description:#{id}#{updated_at}") do
-      Github::Markdown.new.render(:text => description, :mode => :gfm).html_safe
-    end
-  rescue
-    description
-  end
+  renderable :description
+
+  # def rendered_description
+  #   Rails.cache.fetch("description:#{id}#{updated_at}") do
+  #     Bugwalk.markdown.render(description).html_safe
+  #   end
+  # rescue
+  #   description
+  # end
 
   def starts_at=(value)
     self.ends_at = value + 1.hour if value

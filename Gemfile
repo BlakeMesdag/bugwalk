@@ -23,8 +23,6 @@ gem 'twitter-bootswatch-rails'
 gem 'redcarpet'
 gem 'github-markup'
 
-gem 'github_api'
-
 group :development do
   gem 'debugger'
   gem 'sqlite3'

@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
+  include Renderable
   attr_accessible :bio, :email, :name, :is_mentor
 
   has_many :comments
+
+  renderable :bio
 
   def admin?
     (ENV['ADMINS'] || "").split(",").include?(email)
@@ -25,13 +28,6 @@ class User < ActiveRecord::Base
 
   def gravatar_url(size = 120)
     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.strip)}?s=#{size}"
-  end
-
-  def rendered_bio
-    return '<p class="text-info">Click edit to fill in a profile on the left</p>'.html_safe if bio.nil?
-    Rails.cache.fetch("bio:#{updated_at}:#{email}") do
-      Github::Markdown.new.render(:text => bio, :mode => :gfm).html_safe
-    end
   end
 
   private
