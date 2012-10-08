@@ -7,7 +7,14 @@ class RenderableTest < ActiveSupport::TestCase
   end
 
   test "superman renders html" do
+    @superman.body = '## Test'
     assert_match /<h2>/, @superman.rendered_body
+  end
+
+  test "renderable renders github links" do
+    @superman.body = "BlakeMesdag/bugwalk#123"
+
+    assert_match /<a href="https:\/\/github\.com\/BlakeMesdag\/bugwalk\/issues\/123"/, @superman.rendered_body
   end
 end
 
@@ -15,15 +22,11 @@ class Superman
   include Renderable
   renderable :body
 
-  def id
-    0
-  end
-
-  def updated_at
-    Time.now.utc
-  end
-
   def body
-    '## Test'
+    @body ||= '## Test'
+  end
+
+  def body=(value)
+    @body = value
   end
 end

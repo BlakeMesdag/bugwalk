@@ -16,9 +16,7 @@ module Renderable
     def renderable(*args)
       args.each do |arg|
         define_method("rendered_#{arg}") do
-          Rails.cache.fetch("#{arg.to_s}:#{id}:#{updated_at}") do
-            Renderable.renderer.render(self.send(arg)).html_safe
-          end
+          Renderable.renderer.render(self.send(arg)).html_safe
         end
       end
     end
