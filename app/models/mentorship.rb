@@ -19,6 +19,10 @@ class Mentorship < ActiveRecord::Base
     end
   end
 
+  def not_mentoring_self
+    errors.add(:mentee_id, "cannot mentor yourself") if mentor_id == mentee_id
+  end
+
   validates :mentor_id, :mentee_id, :presence => :true
-  validate :check_max_proteges
+  validate :check_max_proteges, :not_mentoring_self
 end

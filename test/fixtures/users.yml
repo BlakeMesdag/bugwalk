@@ -4,3 +4,13 @@ blake:
   name: Blake Mesdag
   email: blake.mesdag@jadedpixel.com
   bio: Some text goes here
+
+chris:
+  name: Chris Wilson
+  email: chris.wilson@jadedpixel.com
+  bio: Some bio stuff should go hizzle
+
+alex:
+  name: Alex Profeit
+  email: alex.profeit@jadedpixel.com
+  bio: 
