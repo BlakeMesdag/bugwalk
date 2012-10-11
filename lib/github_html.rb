@@ -56,7 +56,6 @@ class GithubHTML < Redcarpet::Render::HTML
   def postprocess(text)
     gfm(text)
 
-    test
+    text
   end
-  
 end
