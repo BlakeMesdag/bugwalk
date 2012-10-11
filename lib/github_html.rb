@@ -39,21 +39,24 @@ class GithubHTML < Redcarpet::Render::HTML
   end
 
   def link_usernames(text)
-    text.gsub!(/(^|\s*)@{1}[a-z0-9\-]{1,}($|\s*)/im) do |match|
+    text.gsub!(/(^|\s)@{1}[a-z0-9\-]{1,}($|\s)/i) do |match|
       "<a href=\"#{GITHUB_URL}#{match.gsub(/@/, "")}\">#{match}</a>"
     end
 
     text
   end
 
-  def postprocess(text)
+  def preprocess(text)
     link_repos(text)
-
     link_usernames(text)
-
-    gfm(text)
 
     text
   end
 
+  def postprocess(text)
+    gfm(text)
+
+    test
+  end
+  
 end
