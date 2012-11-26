@@ -16,7 +16,11 @@ module Renderable
     def renderable(*args)
       args.each do |arg|
         define_method("rendered_#{arg}") do
-          Renderable.renderer.render(self.send(arg)).html_safe
+          if self.send(arg)
+            Renderable.renderer.render(self.send(arg)).html_safe
+          else
+            ""
+          end
         end
       end
     end
