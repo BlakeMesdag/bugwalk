@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:BlakeMesdag/gembeat.git
-  revision: 277d2e270d4689444902efe127d012a0e2deabd7
+  remote: git://github.com/BlakeMesdag/gembeat
+  revision: 7fb7ba2388b4caf0c7462d80b32cbe08871c8f65
   specs:
     gembeat (0.0.1)
 
