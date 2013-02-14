@@ -69,7 +69,6 @@ Bugwalk::Application.configure do
     Gembeat.token = gembeat_config["token"]
     Gembeat.pulse_url = gembeat_config["pulse_url"]
     Gembeat.use_ssl = true
-    Gembeat.ca_file = "/usr/lib/ssl/certs/ca-certificates.crt"
     Gembeat.send_pulse
   end
 end
