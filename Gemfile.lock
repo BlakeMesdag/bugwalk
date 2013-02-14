@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:BlakeMesdag/gembeat.git
+  revision: 277d2e270d4689444902efe127d012a0e2deabd7
+  specs:
+    gembeat (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -165,6 +171,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   dalli
   debugger
+  gembeat!
   github-markup
   jquery-rails
   less-rails-bootstrap

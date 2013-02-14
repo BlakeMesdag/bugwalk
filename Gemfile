@@ -43,3 +43,5 @@ gem 'omniauth', '1.1.1'
 gem 'omniauth-google-apps'
 
 gem 'newrelic_rpm'
+
+gem 'gembeat', :git => 'git@github.com:BlakeMesdag/gembeat.git'
