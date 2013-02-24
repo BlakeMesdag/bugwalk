@@ -80,7 +80,7 @@ GEM
     mocha (0.12.6)
       metaclass (~> 0.0.1)
     multi_json (1.5.1)
-    newrelic_rpm (3.4.2.1)
+    newrelic_rpm (3.5.7.59)
     omniauth (1.1.1)
       hashie (~> 1.2)
       rack
